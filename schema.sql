@@ -8,4 +8,4 @@ CREATE TABLE chapter (
   id int PRIMARY KEY AUTO_INCREMENT
 );
 
-// TODO: import txt file
+/* TODO: import txt file*/
