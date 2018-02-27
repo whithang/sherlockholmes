@@ -1,6 +1,7 @@
-var db = require('./../db/db');
-var json2csv = require('json2csv');
-var fs = require('fs');
+const db = require('./../db/db');
+const json2csv = require('json2csv');
+const Promise = require('bluebird');
+const fs = Promise.promisifyAll(require('fs'));
 
 exports.findTopWords = function(req, res) {
   db.topWords(function(err, result, fields) {
@@ -40,4 +41,39 @@ var exportToCSV = function(fields, result, format, res) {
       res.json(result);
     }
   });
+};
+
+exports.processFile = function(filePath) {
+  let lineCount = 0;
+  const lineReader = require('readline').createInterface({
+    input: require('fs').createReadStream(filePath),
+    crlfDelay: Infinity
+  });
+
+  lineReader.on('line', line => {
+    lineCount++;
+    if (line.includes('***')) {
+      printData('section', lineCount, line);
+    }
+    if (line.includes('ADVENTURE')) {
+      printData('chapter', lineCount, line);
+    }
+  }).on('close', () => {
+    console.log('END OF THE FILE');
+    process.exit(0);
+  });
+
+};
+
+var printData = function(type, lineCount, line) {
+  if (type === 'chapter') {
+    console.log(line, ' (starts on Line ' + lineCount + ')');
+  } else if (type === 'section') {
+    console.log('Line ' + lineCount + ': ', line);
+  }
+};
+
+var wordCount = function(line){
+  let words = {};
+  
 };

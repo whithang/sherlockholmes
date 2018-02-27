@@ -1,6 +1,6 @@
-var mysql = require('mysql');
+const mysql = require('mysql');
 
-var connection = mysql.createConnection({
+const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: '',
@@ -34,3 +34,4 @@ module.exports.markLocation = function(sentence) {
 //ORM setup
 //get word count
 //how to split by chapters?
+//translate and write a new novel

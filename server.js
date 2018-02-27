@@ -1,9 +1,11 @@
-var express = require('express');
-var app = express();
-var port = process.env.PORT || 8000;
-var db = require('./db/db');
-var bodyParser = require('body-parser');
-var routes = require('./api/routes');
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 8000;
+const db = require('./db/db');
+const bodyParser = require('body-parser');
+const routes = require('./api/routes');
+const controllers = require('./controllers/controller');
+const bookFile = './rawData/adventures-of-sherlock-holmes.txt';
 
 db.Promise = global.Promise;
 //TODO: fix this promise setup
@@ -15,6 +17,8 @@ app.use(function(req, res) {
 });
 
 routes(app);
+
+controllers.processFile(bookFile);
 
 app.listen(port, function() {
   console.log('server started on: ' + port);

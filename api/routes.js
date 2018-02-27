@@ -1,6 +1,6 @@
 'use strict';
 module.exports = function(app) {
-  var bookTasks = require('./../controllers/controller');
+  const bookTasks = require('./../controllers/controller');
 
   app.route('/topWords')
     .get(bookTasks.findTopWords);
