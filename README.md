@@ -39,3 +39,12 @@ To run server: `npm run start`
 
 1. API functions are found in the controllers/controller.js file
 2. The format for calling the API function is: http://localhost:3000/topWords
+
+## POSSIBLE THINGS TO DO WITH A LARGE BOOK FILE
+1. return specific page (every 20 books)
+2. find random sentence or location
+3. update reading point via API
+4. ORM setup
+5. get word count
+6. how to split by chapters?
+7/ translate and write a new novel

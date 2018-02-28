@@ -9,30 +9,32 @@ const connection = mysql.createConnection({
 
 connection.connect();
 
-module.exports.topWords = function() {
-  //TODO
-  connection.query(``, function(err, results, fields) {
-    if (err) {
-
-    } else {
-
-    }
-  });
-};
-
-module.exports.sentenceCount = function() {
-  //TODO
-};
-
-module.exports.markLocation = function(sentence) {
-  //TODO
-};
-
-//return specific page (every 20 books)
-//find random sentence or location
-//update goodreads via API
-//ORM setup
-//get word count
-//how to split by chapters?
-//translate and write a new novel
+// module.exports.topWords = function() {
+//   //TODO
+//   connection.query(``, function(err, results, fields) {
+//     if (err) {
 //
+//     } else {
+//
+//     }
+//   });
+// };
+//
+// module.exports.topWords =  () => {
+//   connection.query(`SELECT * FROM chapter`, function(err, results, fields) {
+//     if (err) {
+//       return err;
+//     } else {
+//       console.log('results in db/topwords ', results);
+//       return results;
+//     }
+//   });
+// }
+
+// module.exports.sentenceCount = function() {
+//   //TODO
+// };
+//
+// module.exports.markLocation = function(sentence) {
+//   //TODO
+// };

@@ -5,7 +5,9 @@ CREATE DATABASE sh_database;
 USE sh_database;
 
 CREATE TABLE chapter (
-  id int PRIMARY KEY AUTO_INCREMENT
+  id int PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(50)
 );
 
-/* TODO: import txt file*/
+INSERT INTO chapter (id, name) values (1, 'chapter 1');
+INSERT INTO chapter (id, name) values (2, 'chapter 2');

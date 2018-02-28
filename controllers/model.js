@@ -5,46 +5,6 @@ const fs = Promise.promisifyAll(require('fs'));
 const _ = require('underscore');
 let countPrint = 10;
 
-exports.findTopWords = function(req, res) {
-  db.topWords(function(err, result, fields) {
-    if (err) {
-      res.send(err);
-    }
-    exportToCSV(fields, result, res);
-  });
-}
-
-exports.sentenceCount = function(req, res) {
-  db.sentenceCount(function(err, result) {
-    if (err) {
-      res.send(err);
-    }
-    res.json(result);
-  });
-}
-
-exports.markLocation = function(req, res) {
-  db.markLocation(req.query.page, function(err, result) {
-    if (err) {
-      res.send(err);
-    }
-    res.json(result);
-  });
-}
-
-var exportToCSV = function(fields, result, format, res) {
-  var headers = ['Word', 'Count'];
-  var csv = json2csv({data: result, fields: headers});
-  fs.writeFile(Date.now() + '.csv', csv, function(err) {
-    if (err) {
-      throw new Error ('error writing csv file');
-    } else {
-      console.log('file saved');
-      res.json(result);
-    }
-  });
-};
-
 exports.processFile = function(filePath) {
   let lineCount = 0;
   let words = {};
@@ -96,3 +56,51 @@ var printTopWords = function(words, count) {
     console.log(topWords[i]);
   }
 };
+
+
+
+
+
+
+
+
+// exports.findTopWords = async (req, res) => {
+//   try {
+//     let result = await db.topWords();
+//   } catch (error) {
+//     res.send(error);
+//   }
+//   res.send(result);
+//   // exportToCSV(fields, result, res);
+// }
+
+// exports.sentenceCount = function(req, res) {
+//   db.sentenceCount(function(err, result) {
+//     if (err) {
+//       res.send(err);
+//     }
+//     res.json(result);
+//   });
+// }
+//
+// exports.markLocation = function(req, res) {
+//   db.markLocation(req.query.page, function(err, result) {
+//     if (err) {
+//       res.send(err);
+//     }
+//     res.json(result);
+//   });
+// }
+
+// var exportToCSV = function(fields, result, format, res) {
+//   var headers = ['Word', 'Count'];
+//   var csv = json2csv({data: result, fields: headers});
+//   fs.writeFile(Date.now() + '.csv', csv, function(err) {
+//     if (err) {
+//       throw new Error ('error writing csv file');
+//     } else {
+//       console.log('file saved');
+//       res.json(result);
+//     }
+//   });
+// };
