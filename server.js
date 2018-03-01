@@ -13,8 +13,9 @@ app.use(function(req, res) {
 });
 
 routes(app);
-
-model.processFile(bookFile);
+let input = [0, 3, 0, 4];
+//model.processFile(bookFile);
+model.productOfOthers(input);
 
 app.listen(port, function() {
   console.log('server started on: ' + port);

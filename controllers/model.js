@@ -3,7 +3,9 @@ const json2csv = require('json2csv');
 const Promise = require('bluebird');
 const fs = Promise.promisifyAll(require('fs'));
 const _ = require('underscore');
-let countPrint = 10;
+const lo = require('lodash');
+let countPrint = 50;
+let finalWord = null;
 
 exports.processFile = function(filePath) {
   let lineCount = 0;
@@ -21,16 +23,27 @@ exports.processFile = function(filePath) {
     if (line.includes('ADVENTURE')) {
       printData('chapter', lineCount, line);
     }
-    let wordArr = line.split(' ');
+    let wordArr = lo.words(line.toLowerCase());
+    // for (let i = 0; i < wordArr.length; i++) {
+    //   if (wordArr[i] !== '') {
+    //     if (words[wordArr[i]]) {
+    //       words[wordArr[i]]++;
+    //     } else {
+    //       words[wordArr[i]] = 1;
+    //     }
+    //   }
+    let wordPair;
     for (let i = 0; i < wordArr.length; i++) {
-      if (wordArr[i] !== '') {
-        if (words[wordArr[i]]) {
-          words[wordArr[i]]++;
+      if (finalWord) {
+        wordPair = finalWord + ' ' + wordArr[i];
+        if (words[wordPair]) {
+          words[wordPair]++;
         } else {
-          words[wordArr[i]] = 1;
+          words[wordPair] = 1;
         }
       }
-    }
+      finalWord = wordArr[i];
+      }
   }).on('close', () => {
     console.log('END OF THE FILE');
     printTopWords(words, countPrint);
@@ -56,6 +69,41 @@ var printTopWords = function(words, count) {
     console.log(topWords[i]);
   }
 };
+
+
+let output = [84, 28, 12, 21];
+
+exports.productOfOthers = function(input) {
+  let newArr = [];
+  let prod = 1;
+  let zeroCount = 0;
+  for (let i = 0; i < input.length; i++) {
+    if (input[i] === 0) {
+      zeroCount++;
+    } else {
+      prod *= input[i];
+    }
+  }
+  for (i = 0; i < input.length; i++) {
+    if (zeroCount === 0) {
+      input[i] = prod / input[i];
+    } else if (zeroCount === 1 && input[i] === 0){
+      input[i] = prod;
+    } else {
+      input[i] = 0;
+    }
+  }
+
+    // for (let j = 0; j < input.length; j++) {
+    //   if (i !== j) {
+    //     prod *= input[j];
+    //   }
+    // }
+    // newArr[i] = prod;
+  console.log('my new Array: ', input);
+};
+
+
 
 
 
